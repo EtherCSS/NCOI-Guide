@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCOI Dashboard | DepEd ECP</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f8fafc;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #eef2ff;
+      padding: 0.75rem 0;
+      flex-wrap: wrap;
+    }
+    nav button {
+      background: #3b82f6;
+      border: none;
+      color: white;
+      margin: 0.3rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    nav button:hover {
+      background: #1d4ed8;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      padding: 2rem;
+    }
+    h2 {
+      color: #1e3a8a;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    th {
+      background: #e0e7ff;
+      color: #1e3a8a;
+    }
+    .mov {
+      background: #f9fafb;
+      border-left: 4px solid #3b82f6;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 8px;
+    }
+    .download {
+      text-align: right;
+      margin-top: 1.5rem;
+    }
+    .download button {
+      background: #2563eb;
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .download button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+  <header>DepEd NCOI Dashboard — Teachers I to VII</header>
+
+  <nav>
+    <button onclick="showNCOI('T1')">Teacher I</button>
+    <button onclick="showNCOI('T2')">Teacher II</button>
+    <button onclick="showNCOI('T3')">Teacher III</button>
+    <button onclick="showNCOI('T4')">Teacher IV</button>
+    <button onclick="showNCOI('T5')">Teacher V</button>
+    <button onclick="showNCOI('T6')">Teacher VI</button>
+    <button onclick="showNCOI('T7')">Teacher VII</button>
+  </nav>
+
+  <div class="container" id="displayArea">
+    <h2>Select a Teacher Rank Above</h2>
+    <p style="color:#555;">Click on a teacher rank to view its corresponding Non-Classroom Observable Indicators (NCOIs) and suggested Means of Verification (MOVs).</p>
+  </div>
+
+  <script>
+    const indicatorDescriptions = {
+      "1.2.2": "Applies knowledge of learners’ development and diverse learning needs to plan and deliver responsive teaching-learning activities.",
+      "4.2.2": "Uses various assessment tools to monitor, evaluate, and support learner progress and achievement.",
+      "4.3.2": "Provides timely, accurate, and constructive feedback to improve learner performance.",
+      "4.4.2": "Maintains accurate and complete learner records to support instructional decisions and reporting.",
+      "5.2.2": "Engages in professional reflection and applies feedback to improve teaching practices.",
+      "5.4.2": "Shares knowledge and expertise through collaboration and mentoring with colleagues.",
+      "5.5.2": "Participates actively in professional learning communities to enhance teaching competence.",
+      "6.1.2": "Demonstrates ethical and professional behavior aligned with DepEd’s Code of Conduct and values.",
+      "6.2.2": "Shows commitment to school goals through participation in learning and development activities.",
+      "6.4.2": "Implements programs or projects that promote learner welfare and school improvement.",
+      "7.3.2": "Engages parents and the wider school community to improve the learning environment.",
+      "7.4.2": "Contributes to the teaching profession by sharing practices, mentoring peers, or conducting action research."
+    };
+
+    const data = {
+      "T1": {
+        title: "Teacher I",
+        indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"],
+        mov: [
+          "Lesson plans or instructional materials developed.",
+          "Certificates of participation in LAC sessions.",
+          "Learner assessment tools and results.",
+          "Documentation of remediation and interventions.",
+          "Reports on community or school-based projects."
+        ]
+      },
+      "T2": {
+        title: "Teacher II",
+        indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"],
+        mov: [
+          "Learning materials developed based on learners’ needs.",
+          "Certificates from training/seminars.",
+          "Learner progress reports.",
+          "Action research outputs.",
+          "Community engagement documents."
+        ]
+      },
+      "T3": {
+        title: "Teacher III",
+        indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "5.5.2"],
+        mov: [
+          "LAC documentation with contributions.",
+          "Certificates of mentoring or peer coaching.",
+          "Reports of remedial/enrichment sessions.",
+          "Portfolio of classroom-based innovations.",
+          "Reflective journals and feedback reports."
+        ]
+      },
+      "T4": {
+        title: "Teacher IV",
+        indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "7.4.2"],
+        mov: [
+          "Research-based teaching practices documentation.",
+          "Training facilitation certificates.",
+          "Reports on learner achievement gains.",
+          "Professional development plan with outputs.",
+          "Community extension activity reports."
+        ]
+      },
+      "T5": {
+        title: "Teacher V",
+        indicators: ["1.2.2", "5.5.2", "6.1.2", "7.3.2", "7.4.2"],
+        mov: [
+          "Instructional leadership engagement evidence.",
+          "Documentation of classroom innovations.",
+          "Coaching and mentoring session reports.",
+          "Action research implementation results.",
+          "Training conducted or facilitated."
+        ]
+      },
+      "T6": {
+        title: "Teacher VI",
+        indicators: ["1.2.2", "4.4.2", "5.4.2", "5.5.2", "7.4.2"],
+        mov: [
+          "Reports on LAC leadership roles.",
+          "Documentation of professional collaboration.",
+          "Action research dissemination.",
+          "Evidence of mentoring new teachers.",
+          "Reports on professional learning community outputs."
+        ]
+      },
+      "T7": {
+        title: "Teacher VII",
+        indicators: ["1.2.2", "4.4.2", "5.2.2", "6.1.2", "7.4.2"],
+        mov: [
+          "Documentation of professional learning facilitation.",
+          "Research outputs used in policy or program improvement.",
+          "Mentoring/Coaching logs.",
+          "Certificates of training conducted.",
+          "Community-based learning innovations."
+        ]
+      }
+    };
+
+    function showNCOI(rank) {
+      const t = data[rank];
+      const container = document.getElementById("displayArea");
+      container.innerHTML = `
+        <h2>${t.title}</h2>
+        <table>
+          <tr><th>Indicator Code</th><th>Description / Focus Area</th></tr>
+          ${t.indicators.map(code => `
+            <tr>
+              <td>${code}</td>
+              <td>${indicatorDescriptions[code] || "Indicator description not available."}</td>
+            </tr>`).join('')}
+        </table>
+        <div class="mov">
+          <h3>Suggested MOVs</h3>
+          <ul>${t.mov.map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+        <div class="download">
+          <button onclick="window.print()">Download as PDF</button>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
