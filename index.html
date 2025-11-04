@@ -93,7 +93,7 @@
     .download button:hover {
       background: #1d4ed8;
     }
-    /* Donation button style (matches design) */
+    /* Donation button style */
     .donate-btn {
       background: #22c55e;
       color: white;
@@ -107,6 +107,42 @@
     }
     .donate-btn:hover {
       background: #16a34a;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+    .modal-content img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #000;
     }
   </style>
 </head>
@@ -123,6 +159,16 @@
   <div class="container" id="displayArea">
     <h2>Welcome to the DepEd NCOI Dashboard</h2>
     <p style="color:#555;">Navigate through the sections above to explore Non-Classroom Observable Indicators (NCOIs), learn about our mission, or reach out for inquiries.</p>
+  </div>
+
+  <!-- Modal for QR Code -->
+  <div id="gcashModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h3>Scan to Donate via GCash</h3>
+      <img src="gcash-qr.png" alt="GCash QR Code">
+      <p style="margin-top:10px;">Thank you for your support! 💙</p>
+    </div>
   </div>
 
   <script>
@@ -250,17 +296,31 @@
             <li><strong>Phone:</strong> 09661035295</li>
           </ul>
           <h3>☕ Support Our Work</h3>
-           <p>If you like to support this project, you can treat us to a cup of coffee via GCash.</p>
-
-          <button class="donate-btn" onclick="redirectToGCash()">☕ Donate via GCash</button>
+          <p>If you like to support this project, you can treat us to a cup of coffee via GCash.</p>
+          <div style="text-align:center; margin-top:1.5rem;">
+            <button class="donate-btn" onclick="openModal()">☕ Donate via GCash</button>
+          </div>
         `;
       }
     }
 
-    function redirectToGCash() {
-      // Replace this with your actual GCash or Bitly link
-      window.open("https://bit.ly/support-ncoi", "_blank");
+    function openModal() {
+      document.getElementById('gcashModal').style.display = 'block';
     }
+
+    function closeModal() {
+      document.getElementById('gcashModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('gcashModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
   </script>
 </body>
 </html>
+
+
