@@ -28,12 +28,12 @@
       background: #eef2ff;
       padding: 0.75rem 0;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
     nav button {
       background: #3b82f6;
       border: none;
       color: white;
-      margin: 0.3rem;
       padding: 0.6rem 1.2rem;
       border-radius: 8px;
       font-weight: 500;
@@ -93,24 +93,36 @@
     .download button:hover {
       background: #1d4ed8;
     }
+    /* Donation button style (matches design) */
+    .donate-btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 1rem;
+    }
+    .donate-btn:hover {
+      background: #16a34a;
+    }
   </style>
 </head>
 <body>
   <header>DepEd NCOI Dashboard — Teachers I to VII</header>
 
   <nav>
-    <button onclick="showNCOI('T1')">Teacher I</button>
-    <button onclick="showNCOI('T2')">Teacher II</button>
-    <button onclick="showNCOI('T3')">Teacher III</button>
-    <button onclick="showNCOI('T4')">Teacher IV</button>
-    <button onclick="showNCOI('T5')">Teacher V</button>
-    <button onclick="showNCOI('T6')">Teacher VI</button>
-    <button onclick="showNCOI('T7')">Teacher VII</button>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('ncoi')">NCOI</button>
+    <button onclick="showSection('about')">About Us</button>
+    <button onclick="showSection('contact')">Contact</button>
   </nav>
 
   <div class="container" id="displayArea">
-    <h2>Select a Teacher Rank Above</h2>
-    <p style="color:#555;">Click on a teacher rank to view its corresponding Non-Classroom Observable Indicators (NCOIs) and suggested Means of Verification (MOVs).</p>
+    <h2>Welcome to the DepEd NCOI Dashboard</h2>
+    <p style="color:#555;">Navigate through the sections above to explore Non-Classroom Observable Indicators (NCOIs), learn about our mission, or reach out for inquiries.</p>
   </div>
 
   <script>
@@ -130,83 +142,55 @@
     };
 
     const data = {
-      "T1": {
-        title: "Teacher I",
-        indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"],
-        mov: [
-          "Lesson plans or instructional materials developed.",
-          "Certificates of participation in LAC sessions.",
-          "Learner assessment tools and results.",
-          "Documentation of remediation and interventions.",
-          "Reports on community or school-based projects."
-        ]
-      },
-      "T2": {
-        title: "Teacher II",
-        indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"],
-        mov: [
-          "Learning materials developed based on learners’ needs.",
-          "Certificates from training/seminars.",
-          "Learner progress reports.",
-          "Action research outputs.",
-          "Community engagement documents."
-        ]
-      },
-      "T3": {
-        title: "Teacher III",
-        indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "5.5.2"],
-        mov: [
-          "LAC documentation with contributions.",
-          "Certificates of mentoring or peer coaching.",
-          "Reports of remedial/enrichment sessions.",
-          "Portfolio of classroom-based innovations.",
-          "Reflective journals and feedback reports."
-        ]
-      },
-      "T4": {
-        title: "Teacher IV",
-        indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "7.4.2"],
-        mov: [
-          "Research-based teaching practices documentation.",
-          "Training facilitation certificates.",
-          "Reports on learner achievement gains.",
-          "Professional development plan with outputs.",
-          "Community extension activity reports."
-        ]
-      },
-      "T5": {
-        title: "Teacher V",
-        indicators: ["1.2.2", "5.5.2", "6.1.2", "7.3.2", "7.4.2"],
-        mov: [
-          "Instructional leadership engagement evidence.",
-          "Documentation of classroom innovations.",
-          "Coaching and mentoring session reports.",
-          "Action research implementation results.",
-          "Training conducted or facilitated."
-        ]
-      },
-      "T6": {
-        title: "Teacher VI",
-        indicators: ["1.2.2", "4.4.2", "5.4.2", "5.5.2", "7.4.2"],
-        mov: [
-          "Reports on LAC leadership roles.",
-          "Documentation of professional collaboration.",
-          "Action research dissemination.",
-          "Evidence of mentoring new teachers.",
-          "Reports on professional learning community outputs."
-        ]
-      },
-      "T7": {
-        title: "Teacher VII",
-        indicators: ["1.2.2", "4.4.2", "5.2.2", "6.1.2", "7.4.2"],
-        mov: [
-          "Documentation of professional learning facilitation.",
-          "Research outputs used in policy or program improvement.",
-          "Mentoring/Coaching logs.",
-          "Certificates of training conducted.",
-          "Community-based learning innovations."
-        ]
-      }
+      "T1": { title: "Teacher I", indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"], mov: [
+        "Lesson plans or instructional materials developed.",
+        "Certificates of participation in LAC sessions.",
+        "Learner assessment tools and results.",
+        "Documentation of remediation and interventions.",
+        "Reports on community or school-based projects."
+      ]},
+      "T2": { title: "Teacher II", indicators: ["4.3.2", "5.5.2", "6.2.2", "6.4.2", "7.3.2"], mov: [
+        "Learning materials developed based on learners’ needs.",
+        "Certificates from training/seminars.",
+        "Learner progress reports.",
+        "Action research outputs.",
+        "Community engagement documents."
+      ]},
+      "T3": { title: "Teacher III", indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "5.5.2"], mov: [
+        "LAC documentation with contributions.",
+        "Certificates of mentoring or peer coaching.",
+        "Reports of remedial/enrichment sessions.",
+        "Portfolio of classroom-based innovations.",
+        "Reflective journals and feedback reports."
+      ]},
+      "T4": { title: "Teacher IV", indicators: ["1.2.2", "4.2.2", "4.3.2", "5.2.2", "7.4.2"], mov: [
+        "Research-based teaching practices documentation.",
+        "Training facilitation certificates.",
+        "Reports on learner achievement gains.",
+        "Professional development plan with outputs.",
+        "Community extension activity reports."
+      ]},
+      "T5": { title: "Teacher V", indicators: ["1.2.2", "5.5.2", "6.1.2", "7.3.2", "7.4.2"], mov: [
+        "Instructional leadership engagement evidence.",
+        "Documentation of classroom innovations.",
+        "Coaching and mentoring session reports.",
+        "Action research implementation results.",
+        "Training conducted or facilitated."
+      ]},
+      "T6": { title: "Teacher VI", indicators: ["1.2.2", "4.4.2", "5.4.2", "5.5.2", "7.4.2"], mov: [
+        "Reports on LAC leadership roles.",
+        "Documentation of professional collaboration.",
+        "Action research dissemination.",
+        "Evidence of mentoring new teachers.",
+        "Reports on professional learning community outputs."
+      ]},
+      "T7": { title: "Teacher VII", indicators: ["1.2.2", "4.4.2", "5.2.2", "6.1.2", "7.4.2"], mov: [
+        "Documentation of professional learning facilitation.",
+        "Research outputs used in policy or program improvement.",
+        "Mentoring/Coaching logs.",
+        "Certificates of training conducted.",
+        "Community-based learning innovations."
+      ]}
     };
 
     function showNCOI(rank) {
@@ -230,6 +214,52 @@
           <button onclick="window.print()">Download as PDF</button>
         </div>
       `;
+    }
+
+    function showSection(section) {
+      const container = document.getElementById("displayArea");
+
+      if (section === "home") {
+        container.innerHTML = `
+          <h2>Welcome to the DepEd NCOI Dashboard</h2>
+          <p>This dashboard provides access to Non-Classroom Observable Indicators (NCOIs) for Teachers I to VII, aligned with the Philippine Professional Standards for Teachers (PPST).</p>
+        `;
+      } else if (section === "ncoi") {
+        container.innerHTML = `
+          <h2>Non-Classroom Observable Indicators</h2>
+          <p>Select a Teacher Rank Below:</p>
+          <div style="text-align:center; margin-top:1rem;">
+            ${Object.keys(data).map(rank => `
+              <button onclick="showNCOI('${rank}')" style="margin:0.3rem; background:#3b82f6; border:none; color:white; padding:0.5rem 1rem; border-radius:6px;">${data[rank].title}</button>
+            `).join('')}
+          </div>
+        `;
+      } else if (section === "about") {
+        container.innerHTML = `
+          <h2>About Us</h2>
+          <p>The NCOI Dashboard is an initiative aligned with the <strong>Electronic Career Progression Portfolio (ECPP)</strong> of the Department of Education. It aims to guide teachers in identifying appropriate MOVs for their rank and in supporting professional growth.</p>
+          <p>Developed by: <strong>Yuditech</strong></p>
+        `;
+      } else if (section === "contact") {
+        container.innerHTML = `
+          <h2>Contact Us</h2>
+          <p>For inquiries, feedback, or suggestions, please contact:</p>
+          <ul>
+            <li><strong>Email:</strong> yuditech.support@gmail.com</li>
+            <li><strong>Facebook:</strong> John Rib A. Cananga</li>
+            <li><strong>Phone:</strong> 09661035295</li>
+          </ul>
+          <h3>☕ Support Our Work</h3>
+           <p>If you like to support this project, you can treat us to a cup of coffee via GCash.</p>
+
+          <button class="donate-btn" onclick="redirectToGCash()">☕ Donate via GCash</button>
+        `;
+      }
+    }
+
+    function redirectToGCash() {
+      // Replace this with your actual GCash or Bitly link
+      window.open("https://bit.ly/support-ncoi", "_blank");
     }
   </script>
 </body>
